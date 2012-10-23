@@ -1,7 +1,7 @@
 LaTeX
 =====
 
-This section contains software and tools of mine that are related to LaTeX and friends.
+This section contains some of the LaTeX software and tools of mine.
 
 com.braju.{pstricks|graphicalmodels|pedigrees}
 ----------------------------------------------
