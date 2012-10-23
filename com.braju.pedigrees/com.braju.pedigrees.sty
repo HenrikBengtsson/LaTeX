@@ -1,0 +1,215 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% com.braju.pedigrees.sty
+%
+% CONTENTS:
+%
+% 1) Persons
+%  \Pedigree@female
+%  \Pedigree@male
+%
+% 2) Relations:
+%  \Pedigree@couple
+%  \Pedigree@child
+%
+% 3) Labels:
+%  \Pedigree@genotype
+%
+%
+% References:
+% [1] Paper 2 (Version A, 5/7/2001) Guidelines for Pedigree Drawing.
+%     Clinical Genetics Society, Clinical Governance Subcommittee 
+%     http://www.bshg.org.uk/Society/CGS/CGSPedigree.htm
+% 
+% Author: Henrik Bengtsson, hb@maths.lth.se
+% Date: 2001-12-27
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{com.braju.pedigrees}[2000/12/27 PSTricks extensions by 
+Henrik Bengtsson <hb@maths.lth.se>]
+
+\RequirePackage{com.braju.pstricks}
+\RequirePackage{keyval}
+\RequirePackage{ifthen}
+\RequirePackage{calc}
+
+\catcode`\@=11%
+
+% Temporary length variables
+\newlength{\Pedigree@dima}
+\newlength{\Pedigree@dimb}
+\newlength{\Pedigree@dimc}
+
+% Temporary counters
+\newcounter{Pedigree@counta}
+\newcounter{Pedigree@countb}
+\newcounter{Pedigree@countc}
+
+\newlength{\Pedigree@nodeSize}
+\setlength{\Pedigree@nodeSize}{6mm}
+\define@key{Pedigree}{nodeSize}[6mm]{\setlength{\Pedigree@nodeSize}{#1}}   
+
+\newlength{\Pedigree@offset}
+\setlength{\Pedigree@offset}{0.8\Pedigree@nodeSize}
+\define@key{Pedigree}{offset}[0.8\Pedigree@nodeSize]{\setlength{\Pedigree@offset}{#1}}   
+
+\newcommand{\Pedigree@angle}{0}
+\define@key{Pedigree}{angle}[0]{\renewcommand{\Pedigree@angle}{#1}}   
+
+\newlength{\Pedigree@armChild}
+\setlength{\Pedigree@armChild}{0.7\Pedigree@nodeSize}
+\define@key{Pedigree}{armChild}[0.7\Pedigree@nodeSize]{\setlength{\Pedigree@armChild}{#1}}   
+
+\newcounter{Pedigree@affected}%
+\define@key{Pedigree}{affected}[false]{%
+  \ifthenelse{\equal{#1}{true}}{%
+    \setcounter{Pedigree@affected}{1}%
+  }{\ifthenelse{\equal{#1}{false}}{%
+    \setcounter{Pedigree@affected}{0}%
+  }{%
+    \setcounter{Pedigree@affected}{-1}%
+  }}%
+}
+
+\newcounter{Pedigree@dead}%
+\define@key{Pedigree}{dead}[false]{%
+  \ifthenelse{\equal{#1}{true}}{%
+    \setcounter{Pedigree@dead}{1}%
+  }{%
+    \setcounter{Pedigree@dead}{0}%
+  }%
+}
+
+\setkeys{Pedigree}{%
+  affected=false,
+  dead=false,
+  nodeSize=6mm
+}%
+
+\newcommand{\Pedigree@male}[2][affected=false] {%
+  \setkeys{Pedigree}{#1}%
+  \ifthenelse{\value{Pedigree@affected}=1}{%
+    \psset{fillstyle=solid,fillcolor=black}%
+  }{%
+    \psset{fillstyle=solid,fillcolor=white}%
+  }%
+  \rnode{#2}{%
+    \psset{xunit=\Pedigree@nodeSize,yunit=\Pedigree@nodeSize}%
+    \begin{pspicture}(0,0)(1,1)%
+      \rput(0.5,0.5){\pst@Square{\Pedigree@nodeSize}}%
+      \ifthenelse{\value{Pedigree@affected}=-1}{\rput(0.5,0.5){?}}{}%
+      \ifthenelse{\value{Pedigree@dead}=1}{\qline(-0.2,-0.2)(1.2,1.2)}{}%
+%      \rput(0.5,0.5){$\uparrow$}%
+      \rput(0.5,1.5){\pnode{above#2}}%
+    \end{pspicture}%
+  }%
+}% \Pedigree@male
+
+
+\newcommand{\Pedigree@female}[2][affected=false] {%
+  \setkeys{Pedigree}{#1}%
+  \ifthenelse{\value{Pedigree@affected}=1}{%
+    \psset{fillstyle=solid,fillcolor=black}%
+  }{%
+    \psset{fillstyle=solid,fillcolor=white}%
+  }%
+  \rnode{#2}{%
+    \psset{xunit=\Pedigree@nodeSize,yunit=\Pedigree@nodeSize}%
+    \begin{pspicture}(0,0)(1,1)%
+      \rput(0.5,0.5){\pst@Circle{\Pedigree@nodeSize}}%
+      \ifthenelse{\value{Pedigree@affected}=-1}{\rput(0.5,0.5){?}}{}%
+      \ifthenelse{\value{Pedigree@dead}=1}{\qline(-0.2,-0.2)(1.2,1.2)}{}%
+%      \rput(0.5,0.5){$\uparrow$}%
+      \rput(0.5,1.5){\pnode{above#2}}%
+    \end{pspicture}%
+  }%
+}% \Pedigree@female
+
+
+\newcommand{\Pedigree@couple}[3][] {%
+  \ncline[#1]{#2}{#3}%
+  \ncput[#1]{\pnode{#2bind#3}}%
+}% \Pedigree@couple
+
+\newcommand{\Pedigree@child}[4][] {%
+  \ncangle[#1]{#2bind#3}{#4}%
+}% \Pedigree@couple
+
+
+\newcommand{\Pedigree@genotype}[2][c|c] {%
+  \addtolength{\tabcolsep}{-0.4em}%
+  \begin{tabular}{#1}%
+   #2%
+  \end{tabular}%
+  \addtolength{\tabcolsep}{+0.4em}%
+}% \Pedigree@genotype
+
+
+
+
+\newcommand{\Pedigree@phenotype}[2][width=0.4\Pedigree@nodeSize,height=1.0\Pedigree@nodeSize] {%
+  \pst@Thermometer[#1]{#2}%
+}% \Pedigree@genotype
+
+
+
+
+\newcommand{\Pedigree@label}[3][angle=0,offset=0.8\Pedigree@nodeSize]{%
+  \setkeys{Pedigree}{angle=0,offset=0.8\Pedigree@nodeSize}% Default values!
+  \setkeys{Pedigree}{#1}%
+  \setcounter{Pedigree@counta}{\Pedigree@angle}%
+  \ifthenelse{\value{Pedigree@counta} < 0}{%
+    \addtocounter{Pedigree@counta}{360}%
+  }{}%
+
+  \ifthenelse{\value{Pedigree@counta} > 45}{%
+    \ifthenelse{\value{Pedigree@counta} > 135}{%
+      \ifthenelse{\value{Pedigree@counta} > 225}{%
+        \ifthenelse{\value{Pedigree@counta} > 315}{%
+          \def\Pedigree@refpoint{l}%   315 < angle <= 360
+        }{\def\Pedigree@refpoint{t}}%  225 < angle <= 315
+      }{\def\Pedigree@refpoint{r}}%    135 < angle <= 225
+    }{\def\Pedigree@refpoint{b}}%       45 < angle <= 135
+  }{%
+    \def\Pedigree@refpoint{l}%           0 < angle <= 45
+  }%
+  \SpecialCoor%
+%  \rput(#2){\pscircle*{1pt}}%
+%  \rput(#2){\rput(\Pedigree@offset;0){\pscircle*{1pt}}}%
+%  \rput(#2){\rput(\Pedigree@offset;90){\pscircle*{1pt}}}%
+%  \rput(#2){\rput(\Pedigree@offset;180){\pscircle*{1pt}}}%
+%  \rput(#2){\rput(\Pedigree@offset;270){\pscircle*{1pt}}}%
+  \rput(#2){\rput[\Pedigree@refpoint](\Pedigree@offset;\Pedigree@angle){#3}}%
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HISTORY
+%
+% 2001-12-27
+% * Added a hidden node 50% above each node.
+% * Added reference [1].
+%
+% 2001-11-28
+% * Added support for "unknown" affection, i.e. a question mark.
+%
+% 2001-11-05
+% * The node name generated by \...@couple is now of form "<a>bind<b>"
+% * Added \Pedigree@label in the same way as \GM@label in 
+%   com.braju.graphicalmodels.sty.
+%
+% 2001-10-25
+% * Added \Pedigree@child.
+% * Added \Pedigree@couple thanks to Denis Girou. For more information
+%   see http://tug.org/pipermail/pstricks/2001/000594.html.
+%
+% 2001-10-22
+% * Added the length \Pedigree@armChild.
+%
+% 2001-10-18
+% * Created!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+

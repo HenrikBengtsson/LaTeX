@@ -1,0 +1,55 @@
+% PSTricks: Graphical Models: A Gamma-Gamma-Bernoulli plate...
+%
+% A Gamma-Gamma-Bernoulli plate used to model channel intensities on
+% a cDNA microarray.
+\documentclass{article}
+\usepackage{pst-all} % PSTricks
+\usepackage{com.braju.graphicalmodels} % Email author to get this package
+
+\catcode`\@=11%
+
+\pagestyle{empty}
+
+\begin{document}
+\TeXtoEPS
+
+\psset{xunit=10mm,yunit=10mm}
+\begin{pspicture}(-1,0)(6,7)%\showgrid  % Uncomment to show grid!
+  \SpecialCoor  % (a|b) means x-coord from 'a' and y-coord from 'b'.
+
+  \psset{arrowscale=1.5}
+
+  \rput(0.5,0.3){\GM@plate{5}{5.5}{$k=1,2,...,K$}}
+
+  \rput(1.5,6.5){\GM@parameter{a0}} \GM@label{a0}{$a_0$}
+  \rput(a0|0,5.0){\pnode{a0j}}
+  \rput(3.0,0|a0){\GM@node{p}}      \GM@label{p}{$p$}
+  \rput(4.5,0|a0){\GM@parameter{v}} \GM@label{v}{$v$}
+  \rput(v|a0j){\pnode{vj}}
+
+  \rput(p|0,5.0){\GM@node[query=true]{Zk}} \GM@label{Zk}{$Z_k$}
+
+  \rput(-0.2,3.5){\GM@parameter{a}} \GM@label[angle=90]{a}{$a$}
+  \rput(1.8,0|a){\pnode{aj}}
+
+  \rput(Zk|a){\GM@node{Theta}} \GM@label{Theta}{$(\Theta_{R_k},\Theta_{G_k})$}
+
+  \rput(2.0,2.0){\GM@node[observed=true]{Rk}}  \GM@label[angle=-90]{Rk}{$R_k$}
+  \rput(4.0,0|Rk){\GM@node[observed=true]{Gk}} \GM@label[angle=-90]{Gk}{$G_k$}
+
+  \ncline[arrows=->]{p}{Zk}
+  \ncline{a0}{a0j}\ncline[arrows=->]{a0j}{Theta}
+  \ncline{v}{vj}\ncline[arrows=->]{vj}{Theta}
+  \ncline[arrows=->]{Zk}{Theta}
+  \ncline[arrows=->]{Theta}{Rk}
+  \ncline[arrows=->]{Theta}{Gk}
+  \ncline[arrows=->]{a}{Rk}
+  \ncline{a}{aj}\ncline[arrows=->]{aj}{Gk}
+  
+\end{pspicture}
+
+\endTeXtoEPS
+\end{document}
+
+% Author: Henrik Bengtsson, hb@maths.lth.se
+% Date  : 2001-10-24

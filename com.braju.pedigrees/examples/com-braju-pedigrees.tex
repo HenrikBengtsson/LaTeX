@@ -1,0 +1,70 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples for the com.braju.pedigrees package
+% 
+% Henrik Bengtsson, hb@maths.lth.se, February 2004
+%
+% Requirements:
+% [1] Henrik Bengtsson, com.braju.pedigrees.sty, 2004, 
+%     http://www.maths.lth.se/~hb/mypackages/
+% [2] Timothy Van Zandt, fancyvrb, July 1998
+%     http://www.ctan.org/tex-archive/macros/latex/contrib/fancyvrb/
+% [3] Timothy van Zandt, PSTricks, 1997
+%     http://www.tug.org/applications/PSTricks/, 
+%     http://www.pstricks.de/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,dvips]{article}
+\usepackage{com.braju.pedigrees}   % If not available, see [1].
+\usepackage{fancyvrb}              % If not available, see [2].
+\usepackage{graphicx}
+
+\catcode`\@=11%
+
+\newcommand{\example}[1]{%
+ \subsection{Example #1}
+ \begin{center}
+  \input{figures/#1}
+ \end{center}
+ \VerbatimInput[fontsize=\small,numbers=left,obeytabs=true,frame=lines,commentchar=\%]{figures/#1}
+}
+
+\title{Examples how to use the com.braju.pedigrees package}
+\author{Henrik Bengtsson, \texttt{hb@maths.lth.se}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Examples}
+\example{figure001.tex}
+\example{figure002.tex}
+\example{figure003.tex}
+\example{figure004.tex}
+\example{figure005.tex}
+\example{figure006.tex}
+\example{figure007.tex}
+\example{figure008.tex}
+\example{figure009.tex}
+\example{figure010.tex}
+\example{figure011.tex}
+\example{figure012.tex}
+\example{figure013.tex}
+
+\newpage
+\appendix
+\section{Source of com.braju.pedigrees.sty}
+ \VerbatimInput[fontsize=\small,numbers=left,obeytabs=true,frame=lines]{com.braju.pedigrees.sty}
+
+\section{Source of com.braju.pstricks.sty}
+ \VerbatimInput[fontsize=\small,numbers=left,obeytabs=true,frame=lines]{com.braju.pstricks.sty}
+
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HISTORY
+% 2004-02-06
+% o Created. /HB
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,37 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Statistics in Genetics - Lecture Notes
+%
+% Author: Henrik Bengtsson, hb@maths.lth.se
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\psset{xunit=10mm,yunit=10mm}
+\begin{pspicture}(0.5,0.5)(5.5,4)%\showgrid
+  \psset{angleA=-90,angleB=90,armB=\Pedigree@armChild}
+
+  % Generation 1
+  \rput(2,2.8){\Pedigree@male{a}}
+  \rput(4,2.8){\Pedigree@female{b}}
+  \Pedigree@couple{a}{b}
+
+  \rput(1.2,2.8){\Pedigree@genotype[cc]{1&$3_1$}}
+  \rput(4.8,2.8){\Pedigree@genotype[cc]{2&$3_2$}}
+  
+
+  % Generation 2
+  \rput(2,1){\Pedigree@male{c}}
+  \rput(4,1){\Pedigree@female{d}}
+  \Pedigree@child{a}{b}{c}
+  \Pedigree@child{a}{b}{d}
+
+  \rput(1.2,1){\Pedigree@genotype[cc]{2&$3_1$}}
+  \rput(4.8,1){\Pedigree@genotype[cc]{1&$3_2$}}
+
+\end{pspicture}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HISTORY
+%
+% 2001-10-18
+% * Created!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

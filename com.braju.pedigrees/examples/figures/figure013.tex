@@ -1,0 +1,61 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Statistics in Genetics - Lecture Notes
+%
+% Author: Henrik Bengtsson, hb@maths.lth.se
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\psset{xunit=10mm,yunit=10mm}
+\begin{pspicture}(1,1)(5,6)%\showgrid
+  \psset{angleA=-90,angleB=90,armB=1.7\Pedigree@armChild}
+
+  % Generation 1
+  \rput(2,5){\Pedigree@male{a}}
+  \rput(4,5){\Pedigree@female{b}}
+  \Pedigree@couple{a}{b}
+
+  % Generation 2
+  \rput(2,3){\Pedigree@female{c}}
+  \rput(4,3){\Pedigree@male{d}}
+
+  \Pedigree@child{a}{b}{c}
+  \Pedigree@child{a}{b}{d}
+
+  \rput(0,3){\Pedigree@male{e}}
+  \rput(6,3){\Pedigree@female{f}}
+  \Pedigree@couple{c}{e}
+  \Pedigree@couple{d}{f}
+
+  \Pedigree@label[angle=90]{a}{1}
+  \Pedigree@label[angle=90]{b}{2}
+  \Pedigree@label[angle=115]{c}{4}
+  \Pedigree@label[angle=115]{d}{5}
+  \Pedigree@label[angle=115]{e}{3}
+  \Pedigree@label[angle=115]{f}{6}
+
+  % Generation 3
+  \rput(0,1){\Pedigree@female{g}}
+  \rput(2,1){\Pedigree@female{h}}
+
+  \Pedigree@child{c}{e}{g}
+  \Pedigree@child{c}{e}{h}
+
+  \rput(4,1){\Pedigree@male{i}}
+  \rput(6,1){\Pedigree@male{j}}
+
+  \Pedigree@child{d}{f}{i}
+  \Pedigree@child{d}{f}{j}
+
+  \Pedigree@label[angle=115]{g}{7}
+  \Pedigree@label[angle=115]{h}{8}
+  \Pedigree@label[angle=115]{i}{9}
+  \Pedigree@label[angle=120]{j}{10~}
+
+\end{pspicture}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HISTORY
+%
+% 2001-11-06
+% * Created from Pär-Ola Bendahl's PPT image. /HB
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

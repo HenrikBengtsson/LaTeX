@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Statistics in Genetics - Lecture Notes
+%
+% Author: Henrik Bengtsson, hb@maths.lth.se
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\psset{xunit=10mm,yunit=10mm}
+\begin{pspicture}(0.5,0.5)(6.5,6)%\showgrid
+  \psset{angleA=-90,angleB=90,armB=\Pedigree@armChild}
+
+  % Generation 1
+  \rput(2,4.6){\Pedigree@male[affected=true]{a}}
+  \rput(4,4.6){\Pedigree@female{b}}
+  \Pedigree@couple{a}{b}
+
+  \rput(0.5,4.6){\Pedigree@phenotype{0.90}}
+  \rput(1.2,4.6){\Pedigree@genotype[cc]{A&A\\B&B}}
+  \rput(5.3,4.6){\Pedigree@phenotype{0.0}}
+  \rput(4.8,4.6){\Pedigree@genotype[cc]{a&a\\b&b}}
+  
+
+  % Generation 2
+  \rput(3,2.8){\Pedigree@male[affected=true]{c}}
+  \rput(5,2.8){\Pedigree@female{d}}
+  \Pedigree@couple{c}{d}
+  \Pedigree@child{a}{b}{c}
+
+  \rput(1.5,2.8){\Pedigree@phenotype{0.60}}
+  \rput(2.2,2.8){\Pedigree@genotype[c|c]{A&a\\B&b}}
+  \rput(6.3,2.8){\Pedigree@phenotype{0.0}}
+  \rput(5.8,2.8){\Pedigree@genotype[cc]{a&a\\b&b}}
+
+  % Generation 3
+  \rput(3,1){\Pedigree@male{e}}
+  \rput(5,1){\Pedigree@female[affected=true]{f}}
+  \Pedigree@child{c}{d}{e}
+  \Pedigree@child{c}{d}{f}
+
+  \rput(1.5,1){\Pedigree@phenotype{0.3}}
+  \rput(2.2,1){\Pedigree@genotype[c|c]{A&a\\b&b}}
+  \rput(6.3,1){\Pedigree@phenotype{0.70}}
+  \rput(5.8,1){\Pedigree@genotype[c|c]{a&a\\B&b}}
+
+\end{pspicture}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HISTORY
+%
+% 2001-10-18
+% * Created!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

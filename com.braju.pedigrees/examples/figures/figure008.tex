@@ -1,0 +1,61 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Statistics in Genetics - Lecture Notes
+%
+% Author: Henrik Bengtsson, hb@maths.lth.se
+%
+% References:
+% [1] J.L. Haines, M.A. Perica-Vance. Approaches to Gene Mapping in 
+%     Complex Human Diseases. Wiley-Liss, New York, 1998.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\psset{xunit=10mm,yunit=10mm}
+\begin{pspicture}(0.5,0.5)(10,7)%\showgrid
+  \psset{angleA=-90,angleB=90,armB=\Pedigree@armChild}
+
+  % Generation 1
+  \rput(4,6.4){\Pedigree@male{1}}
+  \rput(6,6.4){\Pedigree@female{2}}
+
+  % Generation 2
+  \rput(2,4.6){\Pedigree@female{3}}
+  \rput(4,4.6){\Pedigree@male{4}}
+  \rput(6,4.6){\Pedigree@male{5}}
+  \rput(8,4.6){\Pedigree@female{6}}
+
+  % Generation 3
+  \rput(3,2.8){\Pedigree@male{7}}
+  \rput(7,2.8){\Pedigree@female{8}}
+
+  % Generation 4
+  \rput(1,1){\Pedigree@female{9}}
+  \rput(3,1){\Pedigree@male{10}}
+  \rput(5,1){\Pedigree@male[affected=true]{11}}
+  \rput(7,1){\Pedigree@female[affected=true]{12}}
+  \rput(9,1){\Pedigree@male{13}}
+
+  \Pedigree@couple{1}{2}
+  \Pedigree@child{1}{2}{4}
+  \Pedigree@child{1}{2}{5}
+
+  \Pedigree@couple{3}{4}
+  \Pedigree@child{3}{4}{7}
+
+  \Pedigree@couple{5}{6}
+  \Pedigree@child{5}{6}{8}
+
+  \Pedigree@couple{7}{8}
+  \Pedigree@child{7}{8}{9}
+  \Pedigree@child{7}{8}{10}
+  \Pedigree@child{7}{8}{11}
+  \Pedigree@child{7}{8}{12}
+  \Pedigree@child{7}{8}{13}
+
+\end{pspicture}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HISTORY
+%
+% 2001-11-05
+% * Created from figure 2.13b in [1]! /HB
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

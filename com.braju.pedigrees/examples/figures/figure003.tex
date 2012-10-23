@@ -1,0 +1,39 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Statistics in Genetics - Lecture Notes
+%
+% Author: Henrik Bengtsson, hb@maths.lth.se
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\psset{xunit=10mm,yunit=10mm}
+\begin{pspicture}(0.5,0.5)(5.5,4)%\showgrid
+  \psset{angleA=-90,angleB=90,armB=\Pedigree@armChild}
+
+  % Generation 1
+  \rput(2,2.8){\Pedigree@male{a}}   \rput(2,2.8){1}
+  \rput(4,2.8){\Pedigree@female{b}} \rput(4,2.8){2}
+  \Pedigree@couple{a}{b}
+
+  \Pedigree@label[angle=180]{a}{$G_1=(1\,1)$}
+  \Pedigree@label[angle=0]{b}{$G_2=(1\,2)$}
+
+  % Generation 2
+  \rput(2,1){\Pedigree@male{c}}   \rput(2,1){3}
+  \rput(4,1){\Pedigree@female{d}} \rput(4,1){4}
+  \Pedigree@child{a}{b}{c}
+  \Pedigree@child{a}{b}{d}
+
+  \Pedigree@label[angle=180]{c}{$G_3=(1\,1)$}
+  \Pedigree@label[angle=0]{d}{$G_4=(1\,2)$}
+
+\end{pspicture}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HISTORY
+%
+% 2001-11-05
+% * Labelled the individuals in the pedigree 1,2,3 and 4.
+% * Modified the labels from 11 to G_1(11).
+% 2001-10-18
+% * Created!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

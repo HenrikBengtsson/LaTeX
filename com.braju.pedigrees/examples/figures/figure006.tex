@@ -1,0 +1,56 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Statistics in Genetics - Lecture Notes
+%
+% Author: Henrik Bengtsson, hb@maths.lth.se
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\psset{xunit=10mm,yunit=10mm}
+\begin{pspicture}(1,0.5)(9,5.5)%\showgrid
+  \psset{angleA=-90,angleB=90,armB=\Pedigree@armChild}
+  \psset{arrowscale=1.5}
+
+  % Generation 1
+  \rput(4,4.6){\Pedigree@male{a}}
+  \rput(6,4.6){\Pedigree@female{b}}
+  \Pedigree@couple{a}{b}
+
+
+  % Generation 2
+  \rput(2,2.8){\Pedigree@male{c}}
+  \rput(4,2.8){\Pedigree@female{d}}
+  \Pedigree@couple{c}{d}
+
+  \rput(6,2.8){\Pedigree@male{e}}
+  \rput(8,2.8){\Pedigree@female{f}}
+  \Pedigree@couple{e}{f}
+
+  \Pedigree@child{a}{b}{d}
+  \Pedigree@child{a}{b}{e}
+
+  % Generation 3
+  \rput(3,1){\Pedigree@female[affected=true]{g}}
+  \rput(7,1){\Pedigree@male[affected=true]{h}}
+  \Pedigree@child{c}{d}{g}
+  \Pedigree@child{e}{f}{h}
+
+  % Lines
+  \ncline[linestyle=dashed,linewidth=0.8pt]{->}{a}{e} \bput(0.2){\small$0$}
+  \ncarc[arcangle=-13,linewidth=0.8pt,linestyle=dashed]{->}{a}{d} \bput(0.4){\small$0$}
+  \ncline[linestyle=dashed,linewidth=0.8pt]{->}{b}{d} \aput(0.2){\small$1$}
+  \ncarc[arcangle=13,linewidth=0.8pt,linestyle=dashed]{->}{b}{e} \aput(0.4){\small$1$}
+
+  \ncline[linestyle=dashed,linewidth=0.8pt]{->}{c}{g} \bput(0.4){\small$1$}
+  \ncline[linestyle=dashed,linewidth=0.8pt]{->}{d}{g} \aput(0.4){\small$0$}
+
+  \ncline[linestyle=dashed,linewidth=0.8pt]{->}{e}{h} \bput(0.4){\small$0$}
+  \ncline[linestyle=dashed,linewidth=0.8pt]{->}{f}{h} \aput(0.4){\small$1$}
+
+\end{pspicture}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HISTORY
+%
+% 2001-11-05
+% * Created! /HB
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

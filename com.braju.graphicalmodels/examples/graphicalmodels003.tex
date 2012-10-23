@@ -1,0 +1,100 @@
+% PSTricks: Graphical Models: cDNA microrarray (i,j,k) plates...
+
+\documentclass{article}
+\usepackage{pst-all} % PSTricks
+\usepackage{graphics} % \rotatebox
+\usepackage{com.braju.graphicalmodels} % Email author to get this package
+
+
+\catcode`\@=11%
+
+\pagestyle{empty}
+
+\begin{document}
+\TeXtoEPS
+
+\psset{xunit=10mm,yunit=10mm}
+\begin{pspicture}(-2,-1)(9.2,9)%\showgrid
+  \SpecialCoor  % (a|b) means x-coord from 'a' and y-coord from 'b'.
+
+  \psset{arrowscale=1.5}
+
+  % Within-slide replicates k=1,...K
+  \rput(-0.5,0.3){\GM@plate{6.6}{4.2}{$k=1,\ldots,K$}}
+  \rput(-0.5,0.3){\rput[b](0.25,0.3){\rotatebox{90}{Within-slide replicates}}}
+
+  % Print-tip groups p=1,...P
+  \rput(6.5,0.3){\GM@plate{2.8}{4.2}{$p=1,\ldots,P$}}
+  \rput(8.8,3.8){\rput[t](0.25,0.4){\rotatebox{90}{Print-tip groups}}}
+
+  % Slides j=1,...J
+  \rput(-1.0,-0.2){\GM@plate{10.5}{6.3}{$j=1,\ldots,J$}}
+  \rput(-1.0,-0.2){\rput[b](0.25,0.4){\rotatebox{90}{Slides
+        (between-slide replicates)}}}
+
+  % Genes i=1,...I
+  \rput(-1.5,-0.7){\GM@plate{11.2}{8.3}{$i=1,\ldots,I$}}
+  \rput(-1.5,-0.7){\rput[b](0.25,0.4){\rotatebox{90}{Genes}}}
+  
+
+
+
+  % Plate i=1,...,I
+  \rput(2.0,6.6){\GM@parameter[query=true]{mui}} \GM@label[angle=90]{mui}{$\mu_i$}
+
+  % Plate k=1,...,K
+  \rput(mui|0,3.4){\rput(-1.2,0){\GM@node[observed=true]{Xijk}}} \GM@label[angle=90]{Xijk}{$\mathbf{X}_{ijk}$}
+  \rput(mui|Xijk){\rput(0,-1.5){\GM@node[observed=true]{Yijk}}} \GM@label[angle=-90]{Yijk}{$Y_{ijk}$}
+  \rput(mui|0,3.4){\rput(2.2,0){\GM@node[observed=true]{xyijk}}} \GM@label[angle=90]{xyijk}{$\mathbf{x}_{ijk}$}
+  \rput(mui|0,3.4){\rput(3.4,0){\GM@node[observed=true]{Aijk}}} \GM@label[angle=90]{Aijk}{$A_{ijk}$}
+
+  % Plate j=1,...,J
+  \rput(mui|Xijk){\rput(-1.1,1.9){\GM@node{gammaij}}} \GM@label{gammaij}{$\gamma_{ij}$}
+  \rput(gammaij|mui){\GM@parameter{sigmagammai}} \GM@label[angle=90]{sigmagammai}{$\sigma_{\gamma_i}$}
+  \rput(Aijk|gammaij){\rput(0.9,0){\GM@node{mj}}} \GM@label[angle=180]{mj}{$m_{j}(\cdot)$}
+  \rput(mj|Yijk){\rput(0,1.0){\pnode{mj0}}}
+
+  % Plate p=1,...,P
+  \rput(mj|Xijk){\rput(1.0,0){\GM@node{cjp}}} \GM@label[angle=-90]{cjp}{$c_{jp}(\cdot)$}
+  \rput(cjp|Yijk){\rput(1.0,0){\GM@node{sjp}}} \GM@label[angle=-90]{sjp}{$s_{jp}(\cdot)$}
+
+  % Genewise parameters
+
+  % Spot parameters
+  \rput(mui|Xijk){\rput(1.1,0){\GM@node{epsijk}}} \GM@label[angle=137]{epsijk}{$\varepsilon_{ijk}$}
+
+  % Global parameters
+  \rput(Xijk|mui){\rput(-0.7,1.6){\GM@parameter{beta}}} \GM@label[angle=90]{beta}{$\mathbf{\beta}$}
+  \rput(epsijk|beta){\GM@parameter{sigmaeps}} \GM@label[angle=90]{sigmaeps}{$\sigma_\varepsilon$}
+  \rput(beta|Yijk){\rput(0,1.0){\pnode{beta0}}}
+  \rput(mj|beta){\GM@parameter{alpham}} \GM@label[angle=90]{alpham}{$\alpha_m$}
+  \rput(cjp|beta){\GM@parameter{alphac}} \GM@label[angle=90]{alphac}{$\alpha_c$}
+  \rput(sjp|beta){\GM@parameter{alphas}} \GM@label[angle=90]{alphas}{$\alpha_s$}
+
+  % Edges
+  \ncline[arrows=->]{p}{mui}
+%  \ncline{a0}{a0j}\ncline[arrows=->]{a0j}{epsijk}
+%  \ncline{v}{vj}\ncline[arrows=->]{vj}{epsijk}
+  \ncline[arrows=->]{sigmaeps}{epsijk}
+  \ncline[arrows=->]{sigmagammai}{gammaij}
+  \ncline[arrows=->]{epsijk}{Yijk}
+  \ncline[arrows=->]{gammaij}{Yijk}
+  \ncline[arrows=->]{Xijk}{Yijk}
+  \ncline[arrows=->]{alphac}{cjp}
+  \ncline[arrows=->]{cjp}{Yijk}
+  \ncline[arrows=->]{alphas}{sjp}
+  \ncline[arrows=->]{sjp}{Yijk}
+  \ncline[arrows=->]{Aijk}{Yijk}
+  \ncline[arrows=->]{alpham}{mj}
+  \ncline[arrows=->]{xyijk}{Yijk}
+  \ncline[arrows=-]{mj}{mj0} \ncline[arrows=->]{mj0}{Yijk}
+  \ncline[arrows=->]{mui}{Yijk}
+  \ncline[arrows=-]{beta}{beta0}\ncline[arrows=->]{beta0}{Yijk}
+ 
+\end{pspicture}
+
+\endTeXtoEPS
+\end{document}
+
+% Author: Henrik Bengtsson, hb@maths.lth.se
+% Date  : 2001-10-24

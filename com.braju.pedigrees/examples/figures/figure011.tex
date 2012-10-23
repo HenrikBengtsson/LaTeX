@@ -1,0 +1,41 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Statistics in Genetics - Lecture Notes
+%
+% Author: Henrik Bengtsson, hb@maths.lth.se
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\psset{xunit=10mm,yunit=10mm}
+\begin{pspicture}(1,-0.5)(5,4.5)%\showgrid
+  \psset{angleA=-90,angleB=90,armB=1.7\Pedigree@armChild}
+
+  % Generation 1
+  \rput(2,3.7){\Pedigree@male{a}}
+  \rput(4,3.7){\Pedigree@female[affected=true]{b}}
+  \Pedigree@couple{a}{b}
+
+  % Generation 2
+  \rput(2,1){\Pedigree@female{c}}
+  \rput(4,1){\Pedigree@female[affected=true]{d}}
+
+  \Pedigree@child{a}{b}{c}
+  \Pedigree@child{a}{b}{d}
+
+  \Pedigree@label[angle=90]{a}{1}
+  \Pedigree@label[angle=90]{b}{2}
+  \Pedigree@label[angle=115]{c}{3}
+  \Pedigree@label[angle=115]{d}{4}
+
+  \Pedigree@label[angle=-90,offset=0.7\Pedigree@nodeSize]{a}{\Pedigree@genotype[cc]{a&a\\1&2}}
+  \Pedigree@label[angle=-90,offset=0.7\Pedigree@nodeSize]{b}{\Pedigree@genotype[cc]{A&a\\3&5}}
+  \Pedigree@label[angle=-90,offset=0.7\Pedigree@nodeSize]{c}{\Pedigree@genotype[cc]{a&a\\1&5}}
+  \Pedigree@label[angle=-90,offset=0.7\Pedigree@nodeSize]{d}{\Pedigree@genotype[cc]{A&a\\1&3}}
+
+\end{pspicture}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HISTORY
+%
+% 2001-11-06
+% * Created from Pär-Ola Bendahl's PPT image. /HB
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

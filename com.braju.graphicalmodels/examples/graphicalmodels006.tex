@@ -1,0 +1,46 @@
+% PSTricks: Graphical Model: Hidden Markov Model
+\documentclass{article}
+\usepackage{pst-all} % PSTricks
+\usepackage{com.braju.graphicalmodels} % Email author to get this package
+
+\catcode`\@=11%
+
+\pagestyle{empty}
+
+\begin{document}
+\TeXtoEPS
+ 
+\psset{xunit=10mm,yunit=10mm}
+\begin{pspicture}(0,0.5)(9,4.0)%\showgrid
+  \SpecialCoor
+  \psset{arrowscale=1.5}
+
+  \rput(1.0,3.0){\GM@node{X1}}            \GM@label[angle=90]{X1}{$X_1$}
+  \rput(X1){\rput(1.5,0){\GM@node{X2}}}   \GM@label[angle=90]{X2}{$X_2$}
+  \rput(X2){\rput(1.5,0){\GM@node{X3}}}   \GM@label[angle=90]{X3}{$X_3$}
+  \rput(X3){\rput(1.25,0){\GM@ldots{X4}}}
+  \rput(X4){\rput(1.25,0){\GM@node{Xt1}}} \GM@label[angle=90]{Xt1}{$X_{t-1}$}
+  \rput(Xt1){\rput(1.5,0){\GM@node{Xt}}}  \GM@label[angle=90]{Xt}{$X_t$}
+  \ncline[arrows=->]{X1}{X2}
+  \ncline[arrows=->]{X2}{X3}
+  \ncline{X3}{X4}
+  \ncline[arrows=->]{X4}{Xt1}
+  \ncline[arrows=->]{Xt1}{Xt}
+  \rput(X1){\rput(0,-1.5){\GM@node[observed=true]{Y1}}} \GM@label[angle=-90]{Y1}{$Y_1$}
+  \rput(X2|Y1){\GM@node[observed=true]{Y2}}  \GM@label[angle=-90]{Y2}{$Y_2$}
+  \rput(X3|Y1){\GM@node[observed=true]{Y3}}  \GM@label[angle=-90]{Y3}{$Y_3$}
+  \rput(X4|Y1){\GM@ldots{Y4}}
+  \rput(Xt1|Y1){\GM@node[observed=true]{Yt1}}\GM@label[angle=-90]{Yt1}{$Y_{t-1}$}
+  \rput(Xt|Y1){\GM@node[observed=true]{Yt}}  \GM@label[angle=-90]{Yt}{$Y_t$}
+  \ncline[arrows=->]{X1}{Y1}
+  \ncline[arrows=->]{X2}{Y2}
+  \ncline[arrows=->]{X3}{Y3}
+  \ncline[arrows=->]{Xt1}{Yt1}
+  \ncline[arrows=->]{Xt}{Yt}
+\end{pspicture}
+
+\endTeXtoEPS
+\end{document}
+
+% Author: Henrik Bengtsson, hb@maths.lth.se
+% Date  : 2001-10-23

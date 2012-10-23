@@ -1,0 +1,25 @@
+% PSTricks: Graphical Model: K observed X's with parameter \phi
+\documentclass{article}
+\usepackage{com.braju.graphicalmodels} % Email author to get this package
+
+\catcode`\@=11%
+
+\pagestyle{empty}
+
+\begin{document}
+\TeXtoEPS
+
+\psset{xunit=10mm,yunit=10mm}
+\begin{pspicture}(0,0)(3.5,4)%\showgrid
+  \psset{arrowscale=1.5}
+  \rput(0,0){\GM@plate[plateLabelPos=br]{3.5}{2.7}{$k=1,\ldots,K$}}
+  \rput(1.5,1.5){\GM@node[observed=true]{X}} \rput[l](2.2,1.5){$X$}
+  \rput(1.5,3.7){\GM@parameter{phi}} \rput[l](2.2,3.7){$\phi$}
+  \ncline[arrows=->]{phi}{X}
+\end{pspicture}
+
+\endTeXtoEPS
+\end{document}
+
+% Author: Henrik Bengtsson, hb@maths.lth.se
+% Date  : 2001-10-23

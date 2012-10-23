@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Statistics in Genetics - Lecture Notes
+%
+% Author: Henrik Bengtsson, hb@maths.lth.se
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\psset{xunit=10mm,yunit=10mm}
+\begin{pspicture}(0.5,0.5)(8,7)%\showgrid
+  \psset{angleA=-90,angleB=90,armB=10mm}
+
+  % Generation 1
+  \rput(2,6){\Pedigree@male{a}}
+  \rput(6,6){\Pedigree@female{b}}
+  \Pedigree@couple{a}{b}
+
+  \rput(1.2,6){\Pedigree@genotype[c|c]{1&2}}
+  \rput(6.8,6){\Pedigree@genotype[c|c]{3&4}}
+  
+
+  % Generation 2
+  \rput(2,1){\Pedigree@male{c}}
+  \rput(6,1){\Pedigree@male{d}}
+  \Pedigree@child{a}{b}{c}
+  \Pedigree@child{a}{b}{d}
+
+  \rput(1.2,1){\Pedigree@genotype[c|c]{1&4}}
+  \rput(6.8,1){\Pedigree@genotype[c|c]{2&3}}
+
+  \ncarc[arcangle=-12,linewidth=0.8pt,linestyle=dashed]{->}{a}{c} \bput(0.37){\small$p_1=0$}
+  \ncline[linestyle=dashed,linewidth=0.8pt]{->}{a}{d} \bput(0.3){\small$p_2=1$}
+
+  \ncline[linestyle=dashed,linewidth=0.8pt]{->}{b}{c} \aput(0.3){\small$m_1=1$}
+  \ncarc[arcangle=12,linewidth=0.8pt,linestyle=dashed]{->}{b}{d} \aput(0.355){\small$m_2=0$}
+
+\end{pspicture}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HISTORY
+%
+% 2001-10-18
+% * Created!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
